@@ -46,6 +46,21 @@ function Navbar() {
             <Link href="/blog" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
               Blog
             </Link>
+            <Link href="/siber-tehditler" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
+              Siber Tehditler
+            </Link>
+            <Link href="/ipuclari" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
+              İpuçları
+            </Link>
+            <Link href="/kaynaklar" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
+              Kaynaklar
+            </Link>
+            <Link href="/sss" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
+              SSS
+            </Link>
+            <Link href="/haberler" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-800 hover:text-cyan-400 transition-colors">
+              Haberler
+            </Link>
             <a 
               href="#iletisim" 
               onClick={scrollToContact}
@@ -86,7 +101,7 @@ function Navbar() {
 
       {/* Mobile menu */}
       <div 
-        className={`${isMenuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'} md:hidden bg-gray-800 overflow-hidden transition-all duration-300 ease-in-out`}
+        className={`${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} md:hidden bg-gray-800 overflow-hidden transition-all duration-300 ease-in-out`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
@@ -97,6 +112,21 @@ function Navbar() {
           </Link>
           <Link href="/blog" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
             Blog
+          </Link>
+          <Link href="/siber-tehditler" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
+            Siber Tehditler
+          </Link>
+          <Link href="/ipuclari" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
+            İpuçları
+          </Link>
+          <Link href="/kaynaklar" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
+            Kaynaklar
+          </Link>
+          <Link href="/sss" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
+            SSS
+          </Link>
+          <Link href="/haberler" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-cyan-400">
+            Haberler
           </Link>
           <a 
             href="#iletisim" 
