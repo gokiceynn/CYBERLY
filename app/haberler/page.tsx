@@ -1,48 +1,93 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
+interface NewsItem {
+  title: string
+  date: string
+  category: string
+  excerpt: string
+  url: string
+  source: string
+}
+
 export default function NewsPage() {
-  const news = [
-    {
-      title: "Yeni Ransomware Saldırısı: Dünya Çapında Etki",
-      date: "15 Mart 2024",
-      category: "Tehditler",
-      excerpt: "Son zamanlarda artan ransomware saldırıları, küresel ölçekte işletmeleri etkiliyor. Uzmanlar, güvenlik önlemlerinin artırılması gerektiğini vurguluyor."
-    },
-    {
-      title: "Yapay Zeka ve Siber Güvenlik: Yeni Dönem",
-      date: "12 Mart 2024",
-      category: "Teknoloji",
-      excerpt: "Yapay zeka teknolojileri, siber güvenlik alanında yeni fırsatlar sunuyor. Otomatik tehdit tespiti ve önleme sistemleri geliştiriliyor."
-    },
-    {
-      title: "Veri Sızıntısı: 1 Milyon Kullanıcı Etkilendi",
-      date: "10 Mart 2024",
-      category: "Güvenlik",
-      excerpt: "Büyük bir veri sızıntısı, kullanıcı bilgilerinin tehlikeye girmesine neden oldu. Şirket, güvenlik açığını kapatmak için çalışmalara başladı."
-    },
-    {
-      title: "Siber Güvenlik Eğitimi: Yeni Programlar",
-      date: "8 Mart 2024",
-      category: "Eğitim",
-      excerpt: "Üniversiteler ve özel kurumlar, siber güvenlik alanında yeni eğitim programları sunuyor. Uzman ihtiyacı artıyor."
-    },
-    {
-      title: "Kripto Para Dolandırıcılığı: Artan Risk",
-      date: "5 Mart 2024",
-      category: "Tehditler",
-      excerpt: "Kripto para dolandırıcılığı vakaları artıyor. Uzmanlar, yatırımcıları dikkatli olmaları konusunda uyarıyor."
-    },
-    {
-      title: "Yeni Güvenlik Duvarı Teknolojisi",
-      date: "3 Mart 2024",
-      category: "Teknoloji",
-      excerpt: "Gelişmiş yapay zeka destekli güvenlik duvarı teknolojisi, tehditleri daha etkili tespit ediyor."
+  const [news, setNews] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+
+        // RSS feedlerden haberleri çek
+        const feeds = [
+          {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.bleepingcomputer.com/feed/',
+            source: 'BleepingComputer'
+          },
+          {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.darkreading.com/rss.xml',
+            source: 'Dark Reading'
+          },
+          {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://krebsonsecurity.com/feed/',
+            source: 'KrebsOnSecurity'
+          },
+          {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://thehackernews.com/feed/',
+            source: 'The Hacker News'
+          }
+        ]
+
+        const allNews: NewsItem[] = []
+
+        for (const feed of feeds) {
+          try {
+            const response = await fetch(feed.url)
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`)
+            }
+            const data = await response.json()
+            
+            if (data.items) {
+              const items = data.items.map((item: any) => ({
+                title: item.title || '',
+                date: new Date(item.pubDate || '').toLocaleDateString('tr-TR'),
+                category: 'Siber Güvenlik',
+                excerpt: item.contentSnippet || item.title || '',
+                url: item.link || '',
+                source: feed.source
+              }))
+              allNews.push(...items)
+            }
+          } catch (error) {
+            console.error(`Error fetching ${feed.source}:`, error)
+          }
+        }
+
+        if (allNews.length === 0) {
+          throw new Error('Hiç haber bulunamadı.')
+        }
+
+        // Haberleri tarihe göre sırala
+        allNews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        
+        setNews(allNews)
+      } catch (error: any) {
+        console.error('Error fetching news:', error)
+        setError(error.message || 'Haberler yüklenirken bir hata oluştu.')
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    fetchNews()
+  }, [])
 
   return (
     <>
@@ -71,18 +116,41 @@ export default function NewsPage() {
         {/* News Section */}
         <section className="py-16 bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {news.map((item, index) => (
-                <div key={index} className="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-cyan-400">{item.category}</span>
-                    <span className="text-sm text-gray-400">{item.date}</span>
-                  </div>
-                  <h2 className="text-xl font-bold text-white mb-3">{item.title}</h2>
-                  <p className="text-gray-300">{item.excerpt}</p>
-                </div>
-              ))}
-            </div>
+            {loading ? (
+              <div className="text-center text-white">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto"></div>
+                <p className="mt-4">Haberler yükleniyor...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center text-white">
+                <p className="text-red-400 mb-4">{error}</p>
+                <button 
+                  onClick={() => window.location.reload()} 
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition-colors"
+                >
+                  Yeniden Dene
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {news.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-sm text-cyan-400">{item.source}</span>
+                      <span className="text-sm text-gray-400">{item.date}</span>
+                    </div>
+                    <h2 className="text-xl font-bold text-white mb-3">{item.title}</h2>
+                    <p className="text-gray-300">{item.excerpt}</p>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
