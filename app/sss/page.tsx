@@ -9,99 +9,83 @@ interface FAQItem {
   question: string
   answer: string
   category: string
-  imageUrl?: string
 }
 
 const faqData: FAQItem[] = [
   {
     category: "Genel Siber Güvenlik",
     question: "Siber güvenlik nedir ve neden önemlidir?",
-    answer: "Siber güvenlik, bilgisayar sistemleri, ağlar, programlar ve verilerin dijital saldırılardan korunması için uygulanan teknolojiler, süreçler ve uygulamaların bütünüdür. Önemlidir çünkü: 1) Kişisel ve kurumsal verilerinizi korur, 2) Finansal kayıpları önler, 3) İtibarınızı korur, 4) Yasal yükümlülükleri yerine getirmenizi sağlar, 5) İş sürekliliğini garanti eder.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Siber güvenlik, bilgisayar sistemleri, ağlar, programlar ve verilerin dijital saldırılardan korunması için uygulanan teknolojiler, süreçler ve uygulamaların bütünüdür. Önemlidir çünkü: 1) Kişisel ve kurumsal verilerinizi korur, 2) Finansal kayıpları önler, 3) İtibarınızı korur, 4) Yasal yükümlülükleri yerine getirmenizi sağlar, 5) İş sürekliliğini garanti eder."
   },
   {
     category: "Genel Siber Güvenlik",
     question: "En yaygın siber güvenlik tehditleri nelerdir?",
-    answer: "En yaygın siber güvenlik tehditleri: 1) Fidye yazılımları (Ransomware), 2) Kimlik avı (Phishing) saldırıları, 3) Kötü amaçlı yazılımlar (Malware), 4) Sosyal mühendislik saldırıları, 5) DDoS (Distributed Denial of Service) saldırıları, 6) Veri sızıntıları, 7) Şifre saldırıları, 8) Sıfır gün açıkları.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "En yaygın siber güvenlik tehditleri: 1) Fidye yazılımları (Ransomware), 2) Kimlik avı (Phishing) saldırıları, 3) Kötü amaçlı yazılımlar (Malware), 4) Sosyal mühendislik saldırıları, 5) DDoS (Distributed Denial of Service) saldırıları, 6) Veri sızıntıları, 7) Şifre saldırıları, 8) Sıfır gün açıkları."
   },
   {
     category: "Genel Siber Güvenlik",
     question: "Siber güvenlik riskleri nasıl değerlendirilir?",
-    answer: "Siber güvenlik riskleri şu adımlarla değerlendirilir: 1) Varlıkların tespiti ve sınıflandırılması, 2) Tehditlerin belirlenmesi ve analizi, 3) Zafiyetlerin tespiti, 4) Risk skorlaması, 5) Önceliklendirme, 6) Risk azaltma stratejilerinin belirlenmesi, 7) Sürekli izleme ve güncelleme. Risk değerlendirmesi düzenli olarak tekrarlanmalıdır.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Siber güvenlik riskleri şu adımlarla değerlendirilir: 1) Varlıkların tespiti ve sınıflandırılması, 2) Tehditlerin belirlenmesi ve analizi, 3) Zafiyetlerin tespiti, 4) Risk skorlaması, 5) Önceliklendirme, 6) Risk azaltma stratejilerinin belirlenmesi, 7) Sürekli izleme ve güncelleme. Risk değerlendirmesi düzenli olarak tekrarlanmalıdır."
   },
   {
     category: "Kişisel Güvenlik",
     question: "Güçlü bir şifre nasıl oluşturulur?",
-    answer: "Güçlü bir şifre oluşturmak için: 1) En az 12 karakter kullanın, 2) Büyük ve küçük harfler kullanın, 3) Sayılar ekleyin, 4) Özel karakterler kullanın, 5) Tahmin edilebilir kelimelerden kaçının, 6) Her hesap için farklı şifre kullanın, 7) Şifre yöneticisi kullanmayı düşünün. Örnek: 'P@ssw0rd123!' yerine 'K9#mP$vL2@nX5' gibi karmaşık bir şifre kullanın.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "Güçlü bir şifre oluşturmak için: 1) En az 12 karakter kullanın, 2) Büyük ve küçük harfler kullanın, 3) Sayılar ekleyin, 4) Özel karakterler kullanın, 5) Tahmin edilebilir kelimelerden kaçının, 6) Her hesap için farklı şifre kullanın, 7) Şifre yöneticisi kullanmayı düşünün. Örnek: 'P@ssw0rd123!' yerine 'K9#mP$vL2@nX5' gibi karmaşık bir şifre kullanın."
   },
   {
     category: "Kişisel Güvenlik",
     question: "İki faktörlü doğrulama (2FA) nedir ve neden kullanmalıyım?",
-    answer: "İki faktörlü doğrulama, hesabınıza giriş yaparken iki farklı doğrulama yöntemi kullanmanızı gerektiren bir güvenlik önlemidir. Örneğin: 1) Şifreniz (bildiğiniz bir şey), 2) Telefonunuza gelen kod (sahip olduğunuz bir şey). Kullanmanız önerilir çünkü: 1) Hesabınızı %99.9 daha güvenli hale getirir, 2) Şifreniz çalınsa bile hesabınıza erişimi engeller, 3) Çoğu büyük platform ücretsiz olarak sunuyor.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "İki faktörlü doğrulama, hesabınıza giriş yaparken iki farklı doğrulama yöntemi kullanmanızı gerektiren bir güvenlik önlemidir. Örneğin: 1) Şifreniz (bildiğiniz bir şey), 2) Telefonunuza gelen kod (sahip olduğunuz bir şey). Kullanmanız önerilir çünkü: 1) Hesabınızı %99.9 daha güvenli hale getirir, 2) Şifreniz çalınsa bile hesabınıza erişimi engeller, 3) Çoğu büyük platform ücretsiz olarak sunuyor."
   },
   {
     category: "Kişisel Güvenlik",
     question: "Sosyal medya güvenliği nasıl sağlanır?",
-    answer: "Sosyal medya güvenliği için: 1) Güçlü şifreler kullanın, 2) İki faktörlü doğrulama aktif edin, 3) Gizlilik ayarlarını düzenli kontrol edin, 4) Şüpheli bağlantılara tıklamayın, 5) Kişisel bilgilerinizi paylaşmayın, 6) Düzenli güvenlik kontrolleri yapın, 7) Güvenilir olmayan uygulamalara izin vermeyin, 8) Oturum açık kalmış hesapları kapatın.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "Sosyal medya güvenliği için: 1) Güçlü şifreler kullanın, 2) İki faktörlü doğrulama aktif edin, 3) Gizlilik ayarlarını düzenli kontrol edin, 4) Şüpheli bağlantılara tıklamayın, 5) Kişisel bilgilerinizi paylaşmayın, 6) Düzenli güvenlik kontrolleri yapın, 7) Güvenilir olmayan uygulamalara izin vermeyin, 8) Oturum açık kalmış hesapları kapatın."
   },
   {
     category: "Kurumsal Güvenlik",
     question: "Şirketim için temel siber güvenlik önlemleri nelerdir?",
-    answer: "Temel kurumsal siber güvenlik önlemleri: 1) Güvenlik duvarı ve antivirüs yazılımları, 2) Düzenli güvenlik güncellemeleri, 3) Çalışan eğitimleri, 4) Veri yedekleme sistemleri, 5) Erişim kontrolü ve yetkilendirme, 6) Olay müdahale planı, 7) Güvenlik politikaları ve prosedürleri, 8) Düzenli güvenlik denetimleri.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Temel kurumsal siber güvenlik önlemleri: 1) Güvenlik duvarı ve antivirüs yazılımları, 2) Düzenli güvenlik güncellemeleri, 3) Çalışan eğitimleri, 4) Veri yedekleme sistemleri, 5) Erişim kontrolü ve yetkilendirme, 6) Olay müdahale planı, 7) Güvenlik politikaları ve prosedürleri, 8) Düzenli güvenlik denetimleri."
   },
   {
     category: "Kurumsal Güvenlik",
     question: "Veri sızıntısı durumunda ne yapılmalıdır?",
-    answer: "Veri sızıntısı durumunda yapılması gerekenler: 1) Olayı hemen tespit edin ve izole edin, 2) Güvenlik ekibini ve yönetimi bilgilendirin, 3) Etkilenen sistemleri güvenli hale getirin, 4) Yasal gereklilikleri yerine getirin (KVKK, GDPR vb.), 5) Müşterileri ve paydaşları bilgilendirin, 6) Olayı belgelendirin ve analiz edin, 7) Önleyici tedbirleri güncelleyin.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "Veri sızıntısı durumunda yapılması gerekenler: 1) Olayı hemen tespit edin ve izole edin, 2) Güvenlik ekibini ve yönetimi bilgilendirin, 3) Etkilenen sistemleri güvenli hale getirin, 4) Yasal gereklilikleri yerine getirin (KVKK, GDPR vb.), 5) Müşterileri ve paydaşları bilgilendirin, 6) Olayı belgelendirin ve analiz edin, 7) Önleyici tedbirleri güncelleyin."
   },
   {
     category: "Kurumsal Güvenlik",
     question: "Çalışan siber güvenlik eğitimi nasıl yapılır?",
-    answer: "Çalışan siber güvenlik eğitimi için: 1) Düzenli eğitim programları oluşturun, 2) Gerçek senaryolar üzerinden pratik yapın, 3) Phishing simülasyonları düzenleyin, 4) Güvenlik politikalarını anlatın, 5) Olay raporlama prosedürlerini öğretin, 6) Güncel tehditler hakkında bilgilendirin, 7) Eğitim sonrası değerlendirme yapın, 8) Sürekli güncelleme ve tekrar sağlayın.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Çalışan siber güvenlik eğitimi için: 1) Düzenli eğitim programları oluşturun, 2) Gerçek senaryolar üzerinden pratik yapın, 3) Phishing simülasyonları düzenleyin, 4) Güvenlik politikalarını anlatın, 5) Olay raporlama prosedürlerini öğretin, 6) Güncel tehditler hakkında bilgilendirin, 7) Eğitim sonrası değerlendirme yapın, 8) Sürekli güncelleme ve tekrar sağlayın."
   },
   {
     category: "Yasal ve Düzenleyici",
     question: "KVKK (Kişisel Verilerin Korunması Kanunu) nedir?",
-    answer: "KVKK, kişisel verilerin işlenmesi ve korunmasına ilişkin kuralları belirleyen bir kanundur. Önemli noktalar: 1) Kişisel verilerin işlenmesi için açık rıza gereklidir, 2) Veri güvenliği önlemleri alınmalıdır, 3) Veri sızıntısı durumunda bildirim yapılmalıdır, 4) Veri sahiplerinin hakları korunmalıdır, 5) Veri işleme kayıtları tutulmalıdır, 6) Veri koruma görevlisi atanmalıdır.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "KVKK, kişisel verilerin işlenmesi ve korunmasına ilişkin kuralları belirleyen bir kanundur. Önemli noktalar: 1) Kişisel verilerin işlenmesi için açık rıza gereklidir, 2) Veri güvenliği önlemleri alınmalıdır, 3) Veri sızıntısı durumunda bildirim yapılmalıdır, 4) Veri sahiplerinin hakları korunmalıdır, 5) Veri işleme kayıtları tutulmalıdır, 6) Veri koruma görevlisi atanmalıdır."
   },
   {
     category: "Yasal ve Düzenleyici",
     question: "Siber suçların yasal sonuçları nelerdir?",
-    answer: "Siber suçların yasal sonuçları: 1) TCK'da tanımlanan suçlar (madde 243-245), 2) Ağır para cezaları, 3) Hapis cezaları, 4) Tazminat yükümlülükleri, 5) İtibar kaybı, 6) Lisans iptalleri, 7) İş yapma yasağı. Örnek: KVKK ihlali durumunda 1.8 milyon TL'ye varan para cezaları uygulanabilir.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Siber suçların yasal sonuçları: 1) TCK'da tanımlanan suçlar (madde 243-245), 2) Ağır para cezaları, 3) Hapis cezaları, 4) Tazminat yükümlülükleri, 5) İtibar kaybı, 6) Lisans iptalleri, 7) İş yapma yasağı. Örnek: KVKK ihlali durumunda 1.8 milyon TL'ye varan para cezaları uygulanabilir."
   },
   {
     category: "Yasal ve Düzenleyici",
     question: "Siber sigorta nedir ve neden önemlidir?",
-    answer: "Siber sigorta, siber saldırılar ve veri sızıntıları sonucu oluşabilecek maddi kayıpları karşılayan bir sigorta türüdür. Önemlidir çünkü: 1) Finansal kayıpları karşılar, 2) İtibar yönetimi maliyetlerini karşılar, 3) Yasal savunma giderlerini karşılar, 4) İş kesintisi kayıplarını karşılar, 5) Veri kurtarma maliyetlerini karşılar, 6) Müşteri bildirim maliyetlerini karşılar.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "Siber sigorta, siber saldırılar ve veri sızıntıları sonucu oluşabilecek maddi kayıpları karşılayan bir sigorta türüdür. Önemlidir çünkü: 1) Finansal kayıpları karşılar, 2) İtibar yönetimi maliyetlerini karşılar, 3) Yasal savunma giderlerini karşılar, 4) İş kesintisi kayıplarını karşılar, 5) Veri kurtarma maliyetlerini karşılar, 6) Müşteri bildirim maliyetlerini karşılar."
   },
   {
     category: "Güncel Tehditler",
     question: "Yapay zeka ve siber güvenlik ilişkisi nedir?",
-    answer: "Yapay zeka ve siber güvenlik ilişkisi: 1) Yapay zeka saldırıları tespit etmek için kullanılır, 2) Otomatik tehdit analizi yapabilir, 3) Sahte e-postaları tespit edebilir, 4) Anormal davranışları belirleyebilir, 5) Güvenlik açıklarını önceden tespit edebilir. Ancak yapay zeka aynı zamanda siber saldırganlar tarafından da kullanılabilir.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "Yapay zeka ve siber güvenlik ilişkisi: 1) Yapay zeka saldırıları tespit etmek için kullanılır, 2) Otomatik tehdit analizi yapabilir, 3) Sahte e-postaları tespit edebilir, 4) Anormal davranışları belirleyebilir, 5) Güvenlik açıklarını önceden tespit edebilir. Ancak yapay zeka aynı zamanda siber saldırganlar tarafından da kullanılabilir."
   },
   {
     category: "Güncel Tehditler",
     question: "Kripto para ve blockchain güvenliği nasıl sağlanır?",
-    answer: "Kripto para ve blockchain güvenliği için: 1) Güvenli cüzdan kullanımı, 2) İki faktörlü doğrulama, 3) Soğuk depolama çözümleri, 4) Güvenilir borsaların kullanımı, 5) Özel anahtarların güvenli saklanması, 6) Düzenli güvenlik denetimleri, 7) Şüpheli işlemlerin takibi, 8) Yedekleme stratejileri önemlidir.",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
+    answer: "Kripto para ve blockchain güvenliği için: 1) Güvenli cüzdan kullanımı, 2) İki faktörlü doğrulama, 3) Soğuk depolama çözümleri, 4) Güvenilir borsaların kullanımı, 5) Özel anahtarların güvenli saklanması, 6) Düzenli güvenlik denetimleri, 7) Şüpheli işlemlerin takibi, 8) Yedekleme stratejileri önemlidir."
   },
   {
     category: "Güncel Tehditler",
     question: "IoT (Nesnelerin İnterneti) güvenliği nasıl sağlanır?",
-    answer: "IoT güvenliği için: 1) Güçlü şifreler kullanın, 2) Cihazları güncel tutun, 3) Güvenlik duvarı kullanın, 4) Ağ segmentasyonu yapın, 5) Varsayılan ayarları değiştirin, 6) Düzenli güvenlik taramaları yapın, 7) Güvenilir markaların ürünlerini kullanın, 8) Cihaz erişimlerini sınırlayın, 9) Veri şifreleme kullanın.",
-    imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+    answer: "IoT güvenliği için: 1) Güçlü şifreler kullanın, 2) Cihazları güncel tutun, 3) Güvenlik duvarı kullanın, 4) Ağ segmentasyonu yapın, 5) Varsayılan ayarları değiştirin, 6) Düzenli güvenlik taramaları yapın, 7) Güvenilir markaların ürünlerini kullanın, 8) Cihaz erişimlerini sınırlayın, 9) Veri şifreleme kullanın."
   }
 ]
 
@@ -189,21 +173,7 @@ export default function FAQPage() {
                   </button>
                   {openIndex === index && (
                     <div className="px-6 py-4 bg-gray-800">
-                      <div className="flex flex-col md:flex-row gap-6">
-                        <div className="flex-1">
-                          <p className="text-gray-300 whitespace-pre-line">{faq.answer}</p>
-                        </div>
-                        {faq.imageUrl && (
-                          <div className="w-full md:w-64 h-48 relative rounded-lg overflow-hidden">
-                            <Image
-                              src={faq.imageUrl}
-                              alt={faq.question}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        )}
-                      </div>
+                      <p className="text-gray-300 whitespace-pre-line">{faq.answer}</p>
                     </div>
                   )}
                 </div>
