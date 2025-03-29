@@ -77,9 +77,16 @@ export default function NewsPage() {
                   }
                 }
 
-                // Varsayılan resim URL'si
+                // Varsayılan resim URL'si - daha spesifik siber güvenlik temalı resimler
                 if (!imageUrl) {
-                  imageUrl = `https://source.unsplash.com/random/800x600/?cybersecurity,${encodeURIComponent(item.title)}`;
+                  const keywords = ['cybersecurity', 'hacking', 'network', 'security', 'data-protection'];
+                  const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
+                  imageUrl = `https://source.unsplash.com/random/1200x800/?${randomKeyword}`;
+                }
+
+                // URL'yi düzelt (gerekirse)
+                if (imageUrl && !imageUrl.startsWith('http')) {
+                  imageUrl = `https:${imageUrl}`;
                 }
 
                 return {
@@ -168,7 +175,7 @@ export default function NewsPage() {
           <section className="py-12 bg-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-bold text-white mb-8">Öne Çıkan Haberler</h2>
-              <div className="relative h-[400px] rounded-xl overflow-hidden">
+              <div className="relative h-[500px] rounded-xl overflow-hidden">
                 {featuredNews.map((item, index) => (
                   <div
                     key={index}
@@ -183,16 +190,20 @@ export default function NewsPage() {
                             src={item.imageUrl}
                             alt={item.title}
                             className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = `https://source.unsplash.com/random/1200x800/?cybersecurity`;
+                            }}
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800"></div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent">
-                          <div className="absolute bottom-0 p-6">
-                            <span className="text-sm text-cyan-400">{item.source}</span>
-                            <h3 className="text-xl font-bold text-white mt-2">{item.title}</h3>
-                            <p className="text-gray-300 mt-2">{item.excerpt}</p>
-                            <span className="text-sm text-gray-400 mt-2 block">{item.date}</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent">
+                          <div className="absolute bottom-0 p-8">
+                            <span className="text-sm text-cyan-400 font-medium">{item.source}</span>
+                            <h3 className="text-2xl font-bold text-white mt-2 line-clamp-2">{item.title}</h3>
+                            <p className="text-gray-200 mt-3 line-clamp-2">{item.excerpt}</p>
+                            <span className="text-sm text-gray-400 mt-4 block">{item.date}</span>
                           </div>
                         </div>
                       </div>
