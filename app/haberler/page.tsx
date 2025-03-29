@@ -58,15 +58,40 @@ export default function NewsPage() {
             const data = await response.json()
             
             if (data.items) {
-              const items = data.items.map((item: any) => ({
-                title: item.title || '',
-                date: new Date(item.pubDate || '').toLocaleDateString('tr-TR'),
-                category: 'Siber Güvenlik',
-                excerpt: item.contentSnippet || item.title || '',
-                url: item.link || '',
-                source: feed.source,
-                imageUrl: item.thumbnail || item.enclosure?.link || ''
-              }))
+              const items = data.items.map((item: any) => {
+                // Resim URL'sini farklı alanlardan almayı dene
+                let imageUrl = item.thumbnail || 
+                             item.enclosure?.link || 
+                             item.image?.url || 
+                             item.image?.link ||
+                             item.media?.content?.url ||
+                             item.media?.thumbnail?.url ||
+                             item['media:content']?.$.url ||
+                             item['media:thumbnail']?.$.url;
+
+                // Eğer resim URL'si yoksa, içerikten resim URL'si çıkarmayı dene
+                if (!imageUrl && item.content) {
+                  const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
+                  if (imgMatch) {
+                    imageUrl = imgMatch[1];
+                  }
+                }
+
+                // Varsayılan resim URL'si
+                if (!imageUrl) {
+                  imageUrl = `https://source.unsplash.com/random/800x600/?cybersecurity,${encodeURIComponent(item.title)}`;
+                }
+
+                return {
+                  title: item.title || '',
+                  date: new Date(item.pubDate || '').toLocaleDateString('tr-TR'),
+                  category: 'Siber Güvenlik',
+                  excerpt: item.contentSnippet || item.title || '',
+                  url: item.link || '',
+                  source: feed.source,
+                  imageUrl: imageUrl
+                }
+              })
               allNews.push(...items)
             }
           } catch (error) {
