@@ -3,6 +3,11 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 interface NewsItem {
   title: string
@@ -11,10 +16,12 @@ interface NewsItem {
   excerpt: string
   url: string
   source: string
+  imageUrl?: string
 }
 
 export default function NewsPage() {
   const [news, setNews] = useState<NewsItem[]>([])
+  const [featuredNews, setFeaturedNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -61,7 +68,8 @@ export default function NewsPage() {
                 category: 'Siber Güvenlik',
                 excerpt: item.contentSnippet || item.title || '',
                 url: item.link || '',
-                source: feed.source
+                source: feed.source,
+                imageUrl: item.thumbnail || item.enclosure?.link || ''
               }))
               allNews.push(...items)
             }
@@ -77,6 +85,8 @@ export default function NewsPage() {
         // Haberleri tarihe göre sırala
         allNews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         
+        // İlk 5 haberi öne çıkan haberler olarak ayarla
+        setFeaturedNews(allNews.slice(0, 5))
         setNews(allNews)
       } catch (error: any) {
         console.error('Error fetching news:', error)
@@ -113,7 +123,51 @@ export default function NewsPage() {
           </div>
         </section>
 
-        {/* News Section */}
+        {/* Featured News Slider */}
+        {!loading && !error && featuredNews.length > 0 && (
+          <section className="py-12 bg-gray-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-bold text-white mb-8">Öne Çıkan Haberler</h2>
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                spaceBetween={30}
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 5000 }}
+                className="w-full h-[400px]"
+              >
+                {featuredNews.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                      <div className="relative h-full rounded-xl overflow-hidden">
+                        {item.imageUrl ? (
+                          <img
+                            src={item.imageUrl}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800"></div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent">
+                          <div className="absolute bottom-0 p-6">
+                            <span className="text-sm text-cyan-400">{item.source}</span>
+                            <h3 className="text-xl font-bold text-white mt-2">{item.title}</h3>
+                            <p className="text-gray-300 mt-2">{item.excerpt}</p>
+                            <span className="text-sm text-gray-400 mt-2 block">{item.date}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </section>
+        )}
+
+        {/* News Grid */}
         <section className="py-16 bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {loading ? (
@@ -141,6 +195,13 @@ export default function NewsPage() {
                     rel="noopener noreferrer"
                     className="block bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all duration-300"
                   >
+                    {item.imageUrl && (
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="w-full h-48 object-cover rounded-lg mb-4"
+                      />
+                    )}
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-sm text-cyan-400">{item.source}</span>
                       <span className="text-sm text-gray-400">{item.date}</span>
