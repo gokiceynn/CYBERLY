@@ -77,16 +77,30 @@ export default function NewsPage() {
                   }
                 }
 
-                // Varsayılan resim URL'si - daha spesifik siber güvenlik temalı resimler
-                if (!imageUrl) {
-                  const keywords = ['cybersecurity', 'hacking', 'network', 'security', 'data-protection'];
-                  const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
-                  imageUrl = `https://source.unsplash.com/random/1200x800/?${randomKeyword}`;
+                // URL'yi düzelt (gerekirse)
+                if (imageUrl) {
+                  if (!imageUrl.startsWith('http')) {
+                    imageUrl = `https:${imageUrl}`;
+                  }
+                  // URL'yi temizle ve güvenli hale getir
+                  try {
+                    const url = new URL(imageUrl);
+                    imageUrl = url.toString();
+                  } catch (e) {
+                    imageUrl = null;
+                  }
                 }
 
-                // URL'yi düzelt (gerekirse)
-                if (imageUrl && !imageUrl.startsWith('http')) {
-                  imageUrl = `https:${imageUrl}`;
+                // Varsayılan resim URL'si - daha güvenilir ve önbelleğe alınmış resimler
+                if (!imageUrl) {
+                  const defaultImages = [
+                    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop'
+                  ];
+                  imageUrl = defaultImages[Math.floor(Math.random() * defaultImages.length)];
                 }
 
                 return {
@@ -192,7 +206,14 @@ export default function NewsPage() {
                             className="w-full h-full object-cover"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
-                              target.src = `https://source.unsplash.com/random/1200x800/?cybersecurity`;
+                              const defaultImages = [
+                                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop',
+                                'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop',
+                                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop',
+                                'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop',
+                                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=800&fit=crop'
+                              ];
+                              target.src = defaultImages[Math.floor(Math.random() * defaultImages.length)];
                             }}
                           />
                         ) : (
