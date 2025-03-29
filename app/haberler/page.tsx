@@ -3,11 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 
 interface NewsItem {
   title: string
@@ -24,6 +19,7 @@ export default function NewsPage() {
   const [featuredNews, setFeaturedNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -99,6 +95,25 @@ export default function NewsPage() {
     fetchNews()
   }, [])
 
+  // Otomatik slider için useEffect
+  useEffect(() => {
+    if (featuredNews.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % featuredNews.length)
+      }, 5000)
+
+      return () => clearInterval(timer)
+    }
+  }, [featuredNews.length])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % featuredNews.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + featuredNews.length) % featuredNews.length)
+  }
+
   return (
     <>
       <Navbar />
@@ -128,19 +143,16 @@ export default function NewsPage() {
           <section className="py-12 bg-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-bold text-white mb-8">Öne Çıkan Haberler</h2>
-              <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                spaceBetween={30}
-                slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 5000 }}
-                className="w-full h-[400px]"
-              >
+              <div className="relative h-[400px] rounded-xl overflow-hidden">
                 {featuredNews.map((item, index) => (
-                  <SwiperSlide key={index}>
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
                     <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full">
-                      <div className="relative h-full rounded-xl overflow-hidden">
+                      <div className="relative h-full">
                         {item.imageUrl ? (
                           <img
                             src={item.imageUrl}
@@ -160,9 +172,40 @@ export default function NewsPage() {
                         </div>
                       </div>
                     </a>
-                  </SwiperSlide>
+                  </div>
                 ))}
-              </Swiper>
+                
+                {/* Navigation Buttons */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                  {featuredNews.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        index === currentSlide ? 'bg-cyan-400' : 'bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
         )}
